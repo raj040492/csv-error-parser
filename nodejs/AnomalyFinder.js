@@ -4,7 +4,6 @@
 
 var fs = require('fs'),
 	parse = require('csv-parse'),
-	inputFile, //TODO.. make it readable from terminal
 	config = require("./config.js"),
 	readline = require('readline'),
 	rl = readline.createInterface(process.stdin, process.stdout),
@@ -31,25 +30,28 @@ var fs = require('fs'),
 	},
 	indexNumber = -10; // random number is assigned;
 
-rl.setPrompt('Enter the file that you wish to scan > ');
-rl.prompt();
-rl.on('line', function(fileName) {  
-	inputFile = fileName;
-	rl.setPrompt('Enter the column that you wish to scan > ');
-	rl.prompt();	
-	rl.on('line', function(columnName) {
+rl.question('Enter the file that you wish to scan > ', function(fileName) {
+    rl.question('Enter the column that you wish to scan > ', function(columnName) {
 	    read_file(fileName,columnName)
-	});
+        rl.close();
+    });
 });
 
 
 function read_file (fileName,columnName){
 	fs.createReadStream(fileName)
 		.on('error',function(err){
-			console.log("File "+ fileName + " doesnt exist")
-			console.log("Ensure if the file is in the same directory")
-			console.log("Look for typo errors")
-			process.exit(0);
+			// various errors could be thrown; only if error code is "ENOENT", 
+			// do we conclude that it's a missing file or directory scenario..
+			if (err["code"] == "ENOENT") {
+				console.log("File "+ fileName + " doesnt exist")
+				console.log("Ensure if the file is in the same directory")
+				console.log("Look for typo errors")
+				process.exit(0);
+			}
+			else {
+				console.log(err)
+			}			
 		})
 		.pipe(parse({
 				delimiter : ','
@@ -57,13 +59,14 @@ function read_file (fileName,columnName){
 		.on('data',function(rows){	// reads csv row wise			
 			rowCount +=1;
 			if(rowCount == 1) { // the first row of any csv contains heading for each column
-				header = rows
+				header = rows				
 			}
 			if(rows.indexOf(columnName)>=0) {
 				columnCheck +=1;				
-				indexNumber = rows.indexOf(columnName);
+				indexNumber = rows.indexOf(columnName);								
 			}
-			targetColumnArray.push(rows[indexNumber]);		
+			targetColumnArray.push(rows[indexNumber]);
+					
 		})
 		.on('end',function(){
 			if(columnCheck > 0 ) { // if the chosen column exists in the csv
@@ -124,7 +127,7 @@ function analyse(details,len,columnName) {
 					console.log("Column "+columnName+ " is dominated by datatypes : "+possible_dataType)
 					anamolous_datatype.map(function(datatype){
 						Object.keys(details[datatype]).map(function(key){
-							console.log("Entry " + key + " at row number " + details[datatype][key]["rowCount"] + " is out of place; because it is of datatype " + datatype + "" );
+							console.log("Entry " + key + " at row number " + details[datatype][key]["rowCount"] + " is out of place; because it contains datatype " + datatype + "" );
 						});
 					});
 					process.exit(0);
