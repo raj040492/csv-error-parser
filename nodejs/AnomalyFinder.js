@@ -11,6 +11,7 @@ var fs = require('fs'),
 	threshold_percentage = 0,
 	columnCheck = 0, // to check if the chosen column actually exists in the csv file..
 	Regex = require("regex"),
+	header = '',
 	targetColumnArray = [],
 	possible_anamoly = [],
 	previous_column = '',
@@ -201,33 +202,29 @@ function classify(param,columnName,arrayFullScan) {
 
 function analyse(details,len,columnName) {
 	all_dataType = [];
-	possible_anamoly = [];
+	possible_anamoly = [];	
 	Object.keys(details).map(function(key,iterationCount,array){
 		threshold_percentage = (Object.keys(details[key]).length/len)*100;
-		// if a column contains entry is dominated by integers, then in the details object, integer and
-		// associated objects will contains many key-value pairs
-		// when said object's length exceeds a certain threshold (as mentioned in config.js)
-		// we analyse it as belonging to that particular datatype
-		if(threshold_percentage < config.threshold_percentage && possible_anamoly.indexOf(key) == -1) {
+		// after scanning each column, we have an object (details) that comprises of multiple datatypes
+		// each datatype has a percentange of occurence (can vary from 0-100%)
+		// if this percentage is lesser than the threshold_percentage (decided in config.js)
+		// then we decide that particular datatype and associated entries to be anamolous.
+		if(threshold_percentage < config.threshold_percentage && threshold_percentage >0 && possible_anamoly.indexOf(key) == -1) {
 			possible_anamoly.push(key);			
 		}
 		if(iterationCount == array.length-1) {
-			// after scanning each column, we have an object (details) that comprises of multiple datatypes
-			// each datatype has a percentange of occurence (can vary from 0-100%)
-			// if this percentage is lesser than the threshold_percentage (decided in config.js)
-			// then we decide that particular datatype and associated entries to be anamolous.
 			if(possible_anamoly.length >0) {
-				possible_anamoly.map(function(datatype){
+				possible_anamoly.map(function(datatype,anamolyIterationCount,possibleAnamolyArray){
 					Object.keys(details[datatype]).map(function(key){
 						console.log("Entry " + key + " at row number " + details[datatype][key]["rowCount"] + " in column "+ columnName +" is out of place; because it contains datatype " + datatype + "" );
-					});
-				});					
+					});					
+					if(header.indexOf(columnName) == header.length-1) {
+						process.exit(0)
+					}
+				});
 			}
 			else {
-				if(count == arr.length-1) {
-					// to avoid consoling multiple times..
-					console.log("Column " + columnName + " appears to be clean");
-				}					
+				console.log("Column " + columnName + " appears to be clean");
 			}					
 		}
 	})
@@ -235,6 +232,7 @@ function analyse(details,len,columnName) {
 
 function special_characters(details,param,columnName,arrayFullScan) {
 	var re = new RegExp(/\`|\~|\!|\@|\#|\$|\_|\%|\^|\&|\*|\(|\)|\+|\=|\[|\{|\]|\}|\||\\|\'|\<|\,|\.|\>|\?|\/|\""|\;|\:/g)
+	return re.test(param)
 	if(re.test(param)) {
 		construct_detail_object(details,"special_characters",param,columnName,arrayFullScan);
 	}
@@ -242,6 +240,7 @@ function special_characters(details,param,columnName,arrayFullScan) {
 
 function uppercase_entries(details,param,columnName,arrayFullScan) {	
 	var re = param.match("[A-Z]");
+	return re
 	if(re != null) {
 		construct_detail_object(details,"uppercase_entries",param,columnName,arrayFullScan);
 	}
@@ -249,6 +248,7 @@ function uppercase_entries(details,param,columnName,arrayFullScan) {
 
 function string(details,param,columnName,arrayFullScan) {
 	var re = param.match("[a-zA-Z]"); // looks for integer but even mix of string and somethingElse is accepted	
+	return re
 	if(re != null) {
 		pure_string(details,param,columnName,arrayFullScan)
 		uppercase_entries(details,param,columnName,arrayFullScan)
@@ -258,6 +258,7 @@ function string(details,param,columnName,arrayFullScan) {
 
 function pure_string(details,param,columnName,arrayFullScan) {
 	var re = new RegExp(/^[a-zA-Z]+$/); // looks for exclusively string
+	return re.test(param)
 	states(details,param,columnName,arrayFullScan)
 	state_code(details,param,columnName,arrayFullScan)
 	if(re.test(param)) {			
@@ -267,18 +268,27 @@ function pure_string(details,param,columnName,arrayFullScan) {
 
 function states(details,param,columnName,arrayFullScan) {
 	if(config.states.indexOf(param) >= 0) {
+		return true
 		construct_detail_object(details,"states",param,columnName,arrayFullScan)
+	}
+	else {
+		return false
 	}
 }
 
 function state_code(details,param,columnName,arrayFullScan) {
 	if(config.state_codes.indexOf(param) >= 0) {
+		return true
 		construct_detail_object(details,"state_codes",param,columnName,arrayFullScan)
+	}
+	else {
+		return false
 	}
 }
 
 function integer(details,param,columnName,arrayFullScan) {
 	var re = new RegExp(/\d/); // looks for integer but even mix of integer and somethingElse is accepted
+	return re.test(param)
 	if(re.test(param)) {
 		pure_integer(details,param,columnName,arrayFullScan)	
 		construct_detail_object(details,"integer",param,columnName,arrayFullScan);
@@ -287,6 +297,7 @@ function integer(details,param,columnName,arrayFullScan) {
 
 function pure_integer(details,param,columnName,arrayFullScan) {
 	var re = new RegExp(/^\d+$/); // looks for exclusively integer
+	return re.test(param)
 	if(re.test(param)) {
 		// zipcode(param)			
 		construct_detail_object(details,"pure_integer",param,columnName,arrayFullScan);
@@ -313,6 +324,7 @@ function zipcode(details,param,columnName,arrayFullScan) {
 
 function email(details,param,columnName,arrayFullScan) {	
 	var re = new RegExp(/\S+@\S+\.\S+/)
+	return re.test(param)
 	if(re.test(param)) {			
 		construct_detail_object(details,"email",param,columnName,arrayFullScan);
 	}
@@ -339,3 +351,16 @@ Array.prototype.diff = function(a) {
 Array.prototype.intersection = function(a) {
     return this.filter(function(i) {return a.indexOf(i) >= 0;});
 };
+
+module.exports = {
+	getDetailsObject : getDetailsObject,
+	string : string,
+	pure_string : pure_string,
+	uppercase_entries : uppercase_entries,
+	integer  : integer,
+	pure_integer : pure_integer,
+	email : email,
+	states : states,
+	state_code : state_code,
+	special_characters : special_characters
+}
