@@ -1,7 +1,6 @@
 // use maps.googleapis.com to find validity of a zipcode// TODO...
 // for ex. http://maps.googleapis.com/maps/api/geocode/json?address=99571 gives details of Alaska ..
 // Improvise from the json
-// TODO.. find ways to reset detail object.. must for full file scan.
 
 var fs = require('fs'),
 	parse = require('csv-parse'),
@@ -13,26 +12,32 @@ var fs = require('fs'),
 	columnCheck = 0, // to check if the chosen column actually exists in the csv file..
 	Regex = require("regex"),
 	targetColumnArray = [],
-	possible_dataType = [],
 	possible_anamoly = [],
 	previous_column = '',
 	current_column = '',
 	all_dataType = [],
 	anamolous_datatype = [],
 	rowCount = 0,
-	testCount = 0, //TODO.. remove this later..
 	details = getDetailsObject(),
-	indexNumber = -10; // random number is assigned;
+	indexNumber ;
 
 rl.question('Enter the file that you wish to scan > ', function(fileName) {
-    rl.question('Enter the column that you wish to scan > ', function(columnName) {
-	    read_file(fileName,columnName)
-        rl.close();
-    });
+	rl.question('Kindly Choose One : \n 1.Scan Whole File \n 2.Scan Single Column \n', function(choice) {
+		if(choice == 1) {
+			read_file(fileName,"ALL")
+		}
+		else if (choice == 2) {
+			list_header(fileName);					
+		}
+		else {
+			console.log("Kindly pick either 1 or 2")
+			process.exit(0);
+		}
+	});
+    
 });
 
 function getDetailsObject(){
-
 	return {		
 		"uppercase_entries" : {},
 		"string" : {},
@@ -45,6 +50,39 @@ function getDetailsObject(){
 		"special_characters" : {},
 		"zip_code" : {}
 	}	
+}
+
+function list_header(fileName) {
+	fs.createReadStream(fileName)
+		.on('error',function(err){
+			// various errors could be thrown; only if error code is "ENOENT", 
+			// do we conclude that, it's a missing file or directory scenario..
+			if (err["code"] == "ENOENT") {
+				console.log("File "+ fileName + " doesnt exist")
+				console.log("Ensure if the file is in the same directory")
+				console.log("Look for typo errors")
+				process.exit(0);
+			}
+			else {
+				console.log(err)
+			}			
+		})
+		.pipe(parse({
+				delimiter : ','
+			}))		
+		.on('data',function(rows){	// reads csv, row wise
+			rowCount +=1;
+			if(rowCount == 1) { // the first row of any csv contains heading for each column
+				header = rows;
+				console.log(header + "\n")
+			}
+		})
+		.on('end',function(rows){
+			rl.question('Enter the column that you wish to scan > ', function(columnName) {
+			    read_file(fileName,columnName)
+		        rl.close();
+		    });
+		})
 }
 
 function read_file (fileName,columnName){
@@ -118,7 +156,6 @@ function analyse_column(targetEntry,columnName) {
 }
 
 function start_process(columnName,fileName) {
-
 	if(columnCheck > 0 ) { // if the chosen column exists in the csv	
 		targetColumnArray.map(function(targetEntry,iterationCount,array){
 			if(targetEntry.constructor === Array) {
@@ -148,6 +185,10 @@ function classify(param,columnName,arrayFullScan) {
 	// its clear from the first test(string) that it's not a string
 
 	if(columnName != current_column) {
+		// while scanning the whole file, the flows goes from one column to another
+		// thus when a switch happens from one column to another, we must reset the details object
+		// else the object will contain data from previous column..
+		// reset happens in getDetailsObject();
 		current_column = columnName
 		details = getDetailsObject();
 	}
@@ -158,62 +199,36 @@ function classify(param,columnName,arrayFullScan) {
 	special_characters(details,param,columnName,arrayFullScan)
 }
 
-function analyse(details,len,columnName) {		
-	testCount +=1
-	possible_dataType = [];
+function analyse(details,len,columnName) {
 	all_dataType = [];
 	possible_anamoly = [];
-	Object.keys(details).map(function(key,iterationCount,array){	
-		if(Object.keys(details[key]).length > 0) {
-			// all_dataType array contains all possible datatypes in said column, even if they occur just once	
-			if(all_dataType.indexOf(key) == -1) {
-				all_dataType.push(key);
-			}
-		}
+	Object.keys(details).map(function(key,iterationCount,array){
 		threshold_percentage = (Object.keys(details[key]).length/len)*100;
-
-		
 		// if a column contains entry is dominated by integers, then in the details object, integer and
 		// associated objects will contains many key-value pairs
 		// when said object's length exceeds a certain threshold (as mentioned in config.js)
 		// we analyse it as belonging to that particular datatype
-		if(threshold_percentage >= config.threshold_percentage && possible_dataType.indexOf(key) == -1) {
-			possible_dataType.push(key);			
-		}
-		else if(threshold_percentage < config.threshold_percentage && possible_anamoly.indexOf(key) == -1) {
+		if(threshold_percentage < config.threshold_percentage && possible_anamoly.indexOf(key) == -1) {
 			possible_anamoly.push(key);			
 		}
-		if(iterationCount == array.length-1) {			
-			// possible_dataType.map(function(dataType,count,arr){
-				//possible_dataType contains datatype that can also be anamolous entries
-				// we iteration said array against the never_together object defined in the object
-				// never_together object contains datatypes that can never co-exist together				
-				// if(config.never_together[dataType]) {
-					// not all elements in possible_dataType have been defined in never_together object
-					// example string and integer have been commented out.
-					// anamolous_datatype = all_dataType.intersection(config.never_together[dataType]);
-				// }
-				// if(columnName == "ip_address") {
-				// 	console.log("details is ",details)
-				// }
-				if(possible_anamoly.length >0) {
-					possible_anamoly.map(function(datatype){
-
-						Object.keys(details[datatype]).map(function(key){
-							console.log("Entry " + key + " at row number " + details[datatype][key]["rowCount"] + " in column "+ columnName +" is out of place; because it contains datatype " + datatype + "" );
-						});
+		if(iterationCount == array.length-1) {
+			// after scanning each column, we have an object (details) that comprises of multiple datatypes
+			// each datatype has a percentange of occurence (can vary from 0-100%)
+			// if this percentage is lesser than the threshold_percentage (decided in config.js)
+			// then we decide that particular datatype and associated entries to be anamolous.
+			if(possible_anamoly.length >0) {
+				possible_anamoly.map(function(datatype){
+					Object.keys(details[datatype]).map(function(key){
+						console.log("Entry " + key + " at row number " + details[datatype][key]["rowCount"] + " in column "+ columnName +" is out of place; because it contains datatype " + datatype + "" );
 					});
-					// details = getDetailsObject()
-					// process.exit(0);
-				}
-				else {
-					if(count == arr.length-1) {
-						// to avoid consoling multiple times..
-						console.log("Column " + columnName + " appears to be clean")	
-						// process.exit(0);
-					}					
-				}
-			// });			
+				});					
+			}
+			else {
+				if(count == arr.length-1) {
+					// to avoid consoling multiple times..
+					console.log("Column " + columnName + " appears to be clean");
+				}					
+			}					
 		}
 	})
 }
@@ -233,7 +248,6 @@ function uppercase_entries(details,param,columnName,arrayFullScan) {
 }
 
 function string(details,param,columnName,arrayFullScan) {
-
 	var re = param.match("[a-zA-Z]"); // looks for integer but even mix of string and somethingElse is accepted	
 	if(re != null) {
 		pure_string(details,param,columnName,arrayFullScan)
@@ -307,9 +321,10 @@ function email(details,param,columnName,arrayFullScan) {
 function construct_detail_object(details,datatype,param,columnName,arrayFullScan) {
 	// this function updates the details Object with all requisite informations.
 	// this function has been built flexibly so that it can be invoked from multiple functions
-
 	rowCount = arrayFullScan == undefined ? targetColumnArray.indexOf(param) : arrayFullScan.indexOf(param)
-
+	//when single column is scanned targetColumnArray will comprise of single array where we use indexOf to find our param
+	//when whole file is scanned targetColumnArray comprises of multiple array ;now we pick each child array(arrayFullScan)
+	// and find the indexOf param in it.
 	details[datatype][param] = {
 		"parameter" : param,
 		"columnName" : columnName,
