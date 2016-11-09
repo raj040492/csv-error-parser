@@ -5,8 +5,6 @@
 var fs = require('fs'),
 	parse = require('csv-parse'),
 	config = require("./config.js"),
-	readline = require('readline'),
-	rl = readline.createInterface(process.stdin, process.stdout),
 	http = require("http"),
 	threshold_percentage = 0,
 	columnCheck = 0, // to check if the chosen column actually exists in the csv file..
@@ -20,23 +18,22 @@ var fs = require('fs'),
 	anamolous_datatype = [],
 	rowCount = 0,
 	details = getDetailsObject(),
-	indexNumber ;
+	indexNumber,
+	fileName  = process.argv[2],
+	columnName  = process.argv[3];
 
-rl.question('Enter the file that you wish to scan > ', function(fileName) {
-	rl.question('Kindly Choose One : \n 1.Scan Whole File \n 2.Scan Single Column \n', function(choice) {
-		if(choice == 1) {
-			read_file(fileName,"ALL")
-		}
-		else if (choice == 2) {
-			list_header(fileName);					
-		}
-		else {
-			console.log("Kindly pick either 1 or 2")
-			process.exit(0);
-		}
-	});
-    
-});
+if(fileName && columnName) {
+	read_file(fileName,columnName);
+}
+else {
+	if(fileName && columnName == undefined) {
+		read_file(fileName,"ALL");
+	}
+	else if(fileName == undefined && columnName == undefined) {
+		console.log("Please enter the filename that you wish to scan \n ex: node <filename> <columnName> \n <columnName> is optional")
+		process.exit(0);
+	}
+}
 
 function getDetailsObject(){
 	return {		
@@ -206,7 +203,7 @@ function analyse(details,len,columnName) {
 	Object.keys(details).map(function(key,iterationCount,array){
 		threshold_percentage = (Object.keys(details[key]).length/len)*100;
 		// after scanning each column, we have an object (details) that comprises of multiple datatypes
-		// each datatype has a percentange of occurence (can vary from 0-100%)
+ 		// each datatype has a percentange of occurence (can vary from 0-100%)
 		// if this percentage is lesser than the threshold_percentage (decided in config.js)
 		// then we decide that particular datatype and associated entries to be anamolous.
 		if(threshold_percentage < config.threshold_percentage && threshold_percentage >0 && possible_anamoly.indexOf(key) == -1) {
@@ -231,45 +228,55 @@ function analyse(details,len,columnName) {
 }
 
 function special_characters(details,param,columnName,arrayFullScan) {
-	var re = new RegExp(/\`|\~|\!|\@|\#|\$|\_|\%|\^|\&|\*|\(|\)|\+|\=|\[|\{|\]|\}|\||\\|\'|\<|\,|\.|\>|\?|\/|\""|\;|\:/g)
-	return re.test(param)
+	var re = new RegExp(/\`|\~|\!|\@|\#|\$|\_|\%|\^|\&|\*|\(|\)|\+|\=|\[|\{|\]|\}|\||\\|\'|\<|\,|\.|\>|\?|\/|\""|\;|\:/g)	
 	if(re.test(param)) {
 		construct_detail_object(details,"special_characters",param,columnName,arrayFullScan);
+		return true
+	}
+	else {
+		return false
 	}
 }
 
 function uppercase_entries(details,param,columnName,arrayFullScan) {	
 	var re = param.match("[A-Z]");
-	return re
+	//return re
 	if(re != null) {
 		construct_detail_object(details,"uppercase_entries",param,columnName,arrayFullScan);
+		return re
 	}
 }
 
 function string(details,param,columnName,arrayFullScan) {
 	var re = param.match("[a-zA-Z]"); // looks for integer but even mix of string and somethingElse is accepted	
-	return re
+	//return re
 	if(re != null) {
 		pure_string(details,param,columnName,arrayFullScan)
 		uppercase_entries(details,param,columnName,arrayFullScan)
-		construct_detail_object(details,"string",param,columnName,arrayFullScan);		
+		construct_detail_object(details,"string",param,columnName,arrayFullScan);	
+		return re	
 	}
 }
 
 function pure_string(details,param,columnName,arrayFullScan) {
 	var re = new RegExp(/^[a-zA-Z]+$/); // looks for exclusively string
-	return re.test(param)
+	//return re.test(param)
 	states(details,param,columnName,arrayFullScan)
 	state_code(details,param,columnName,arrayFullScan)
-	if(re.test(param)) {			
+	if(re.test(param)) {
 		construct_detail_object(details,"pure_string",param,columnName,arrayFullScan);		
+		return true
+	}
+	else {
+		return false
 	}
 }
 
 function states(details,param,columnName,arrayFullScan) {
 	if(config.states.indexOf(param) >= 0) {
-		return true
+		// return true
 		construct_detail_object(details,"states",param,columnName,arrayFullScan)
+		return true
 	}
 	else {
 		return false
@@ -278,8 +285,9 @@ function states(details,param,columnName,arrayFullScan) {
 
 function state_code(details,param,columnName,arrayFullScan) {
 	if(config.state_codes.indexOf(param) >= 0) {
-		return true
+		// return true
 		construct_detail_object(details,"state_codes",param,columnName,arrayFullScan)
+		return true
 	}
 	else {
 		return false
@@ -288,19 +296,27 @@ function state_code(details,param,columnName,arrayFullScan) {
 
 function integer(details,param,columnName,arrayFullScan) {
 	var re = new RegExp(/\d/); // looks for integer but even mix of integer and somethingElse is accepted
-	return re.test(param)
+	//return re.test(param)
 	if(re.test(param)) {
 		pure_integer(details,param,columnName,arrayFullScan)	
 		construct_detail_object(details,"integer",param,columnName,arrayFullScan);
+		return re.test(param)
+	}
+	else {
+		return false
 	}
 }
 
 function pure_integer(details,param,columnName,arrayFullScan) {
 	var re = new RegExp(/^\d+$/); // looks for exclusively integer
-	return re.test(param)
+	//return re.test(param)
 	if(re.test(param)) {
 		// zipcode(param)			
 		construct_detail_object(details,"pure_integer",param,columnName,arrayFullScan);
+		return re.test(param)
+	}
+	else {
+		return false
 	}
 }
 
@@ -324,13 +340,18 @@ function zipcode(details,param,columnName,arrayFullScan) {
 
 function email(details,param,columnName,arrayFullScan) {	
 	var re = new RegExp(/\S+@\S+\.\S+/)
-	return re.test(param)
+	//return re.test(param)
 	if(re.test(param)) {			
 		construct_detail_object(details,"email",param,columnName,arrayFullScan);
+		return re.test(param)
+	}
+	else {
+		return false
 	}
 }
 
 function construct_detail_object(details,datatype,param,columnName,arrayFullScan) {
+	// return "rajjj"
 	// this function updates the details Object with all requisite informations.
 	// this function has been built flexibly so that it can be invoked from multiple functions
 	rowCount = arrayFullScan == undefined ? targetColumnArray.indexOf(param) : arrayFullScan.indexOf(param)
@@ -342,6 +363,7 @@ function construct_detail_object(details,datatype,param,columnName,arrayFullScan
 		"columnName" : columnName,
 		"rowCount" : rowCount
 	}
+	// return details
 }
 
 Array.prototype.diff = function(a) {
