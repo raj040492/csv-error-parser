@@ -1,0 +1,805 @@
+Time Taken : 0.035 secs 
+FileSize : 0.011153 MB 
+Memory Heap Used : 7262984
+Columns Scanned : 1
+Rows Scanned : 100
+Time: Mon Nov 14 2016 12:07:57 GMT+0530 (IST)
+
+Time Taken : 0.034 secs 
+FileSize : 0.011153 MB 
+Memory Heap Used : 9303360
+Columns Scanned : 18
+Rows Scanned : 100
+Time: Mon Nov 14 2016 12:08:01 GMT+0530 (IST)
+
+Time Taken : 0.021 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7738408
+Columns Scanned : 7
+Rows Scanned : 10
+Time: Mon Nov 14 2016 12:08:05 GMT+0530 (IST)
+
+Time Taken : 0.021 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7727048
+Columns Scanned : 1
+Rows Scanned : 10
+Time: Mon Nov 14 2016 12:08:09 GMT+0530 (IST)
+
+Time Taken : 0.033 secs 
+FileSize : 0.011155 MB 
+Memory Heap Used : 9326944
+Columns Scanned : 18
+Rows Scanned : 100
+Time: Mon Nov 14 2016 12:17:33 GMT+0530 (IST)
+
+Time Taken : 0.989 secs 
+FileSize : 0.10835 MB 
+Memory Heap Used : 207437488
+Columns Scanned : 18
+Rows Scanned : 1000
+Time: Mon Nov 14 2016 12:17:43 GMT+0530 (IST)
+
+Time Taken : 1.105 secs 
+FileSize : 0.10835 MB 
+Memory Heap Used : 207436456
+Columns Scanned : 18
+Rows Scanned : 1000
+Time: Mon Nov 14 2016 12:18:32 GMT+0530 (IST)
+
+Time Taken : 0.981 secs 
+FileSize : 0.10835 MB 
+Memory Heap Used : 207436912
+Columns Scanned : 18
+Rows Scanned : 1000
+Time: Mon Nov 14 2016 12:18:46 GMT+0530 (IST)
+
+Time Taken : 0.062 secs 
+FileSize : 0.10835 MB 
+Memory Heap Used : 11551248
+Columns Scanned : 1
+Rows Scanned : 1000
+Time: Mon Nov 14 2016 12:19:00 GMT+0530 (IST)
+
+Time Taken : 0.051 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7773360
+Columns Scanned : 7
+Rows Scanned : 10
+Time: Mon Nov 14 2016 12:19:16 GMT+0530 (IST)
+
+Time Taken : 0.024 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7728928
+Columns Scanned : 1
+Rows Scanned : 10
+Time: Mon Nov 14 2016 12:19:25 GMT+0530 (IST)
+
+Time Taken : 0.024 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7726704
+Columns Scanned : 7
+Rows Scanned : 10
+Time: Mon Nov 14 2016 12:19:28 GMT+0530 (IST)
+
+Time Taken : 0.029 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7739816
+Columns Scanned : 7
+Rows Scanned : 10
+Time: Mon Nov 14 2016 12:19:58 GMT+0530 (IST)
+
+Time Taken : 0.022 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7770304
+Columns Scanned : 7
+Rows Scanned : 10
+Time: Mon Nov 14 2016 12:22:41 GMT+0530 (IST)
+
+Time Taken : 0.024 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7747824
+Columns Scanned : 7
+Rows Scanned : 10
+Time: Mon Nov 14 2016 12:23:14 GMT+0530 (IST)
+
+Time Taken : 0.021 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7737672
+Columns Scanned : 7
+Rows Scanned : 10
+Time: Mon Nov 14 2016 12:23:45 GMT+0530 (IST)
+
+Time Taken : 0.025 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7781992
+Columns Scanned : 7
+Rows Scanned : 10
+Time: Mon Nov 14 2016 12:23:49 GMT+0530 (IST)
+
+Time Taken : 0.023 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7767896
+Columns Scanned : 7
+Rows Scanned : 10
+Time: Mon Nov 14 2016 12:23:59 GMT+0530 (IST)
+
+Time Taken : 0.022 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7744776
+Columns Scanned : 7
+Rows Scanned : 10
+Time: Mon Nov 14 2016 12:26:25 GMT+0530 (IST)
+
+Time Taken : 0.031 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7818808
+Columns Scanned : 7
+Rows Scanned : 10
+Time: Mon Nov 14 2016 12:26:33 GMT+0530 (IST)
+
+Time Taken : 0.029 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7987744
+Columns Scanned : 7
+Rows Scanned : 10
+Time: Mon Nov 14 2016 12:26:43 GMT+0530 (IST)
+
+Time Taken : 0.026 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7987976
+Columns Scanned : 7
+Rows Scanned : 10
+Time: Mon Nov 14 2016 12:26:47 GMT+0530 (IST)
+
+Time Taken : 0.024 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7768600
+Columns Scanned : 1
+Rows Scanned : 10
+Time: Mon Nov 14 2016 12:26:49 GMT+0530 (IST)
+
+Time Taken : 0.025 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7772880
+Columns Scanned : 1
+Rows Scanned : 10
+Time: Mon Nov 14 2016 12:26:52 GMT+0530 (IST)
+
+Time Taken : 0.026 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 8021248
+Columns Scanned : 7
+Rows Scanned : 10
+Time: Mon Nov 14 2016 12:26:57 GMT+0530 (IST)
+
+Time Taken : 0.036 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 8001552
+Columns Scanned : 7
+Rows Scanned : 10
+Time: Mon Nov 14 2016 12:27:16 GMT+0530 (IST)
+
+Time Taken : 0.024 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7772880
+Columns Scanned : 1
+Rows Scanned : 10
+Time: Mon Nov 14 2016 12:27:21 GMT+0530 (IST)
+
+Time Taken : 0.023 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7735992
+Columns Scanned : 1
+Rows Scanned : 10
+Time: Mon Nov 14 2016 12:30:49 GMT+0530 (IST)
+
+Time Taken : 0.029 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7985496
+Columns Scanned : 7
+Rows Scanned : 10
+Time: Mon Nov 14 2016 12:30:52 GMT+0530 (IST)
+
+Time Taken : 0.027 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7995360
+Columns Scanned : 7
+Rows Scanned : 10
+Time: Mon Nov 14 2016 12:32:02 GMT+0530 (IST)
+
+Time Taken : 0.025 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7764648
+Columns Scanned : 1
+Rows Scanned : 10
+Time: Mon Nov 14 2016 12:32:10 GMT+0530 (IST)
+
+Time Taken : 3.279 secs 
+FileSize : 0.10835 MB 
+Memory Heap Used : 471490544
+Columns Scanned : 18
+Rows Scanned : 1000
+Time: Mon Nov 14 2016 12:32:26 GMT+0530 (IST)
+
+Time Taken : 0.029 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7996976
+Columns Scanned : 7
+Rows Scanned : 10
+Time: Mon Nov 14 2016 12:33:14 GMT+0530 (IST)
+
+Time Taken : 0.028 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7981784
+Columns Scanned : 7
+Rows Scanned : 10
+Time: Mon Nov 14 2016 12:34:06 GMT+0530 (IST)
+
+Time Taken : 0.021 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7723392
+Columns Scanned : 1
+Rows Scanned : 10
+Time: Mon Nov 14 2016 12:34:13 GMT+0530 (IST)
+
+Time Taken : 3.324 secs 
+FileSize : 0.10835 MB 
+Memory Heap Used : 471488544
+Columns Scanned : 18
+Rows Scanned : 1000
+Time: Mon Nov 14 2016 12:34:22 GMT+0530 (IST)
+
+Time Taken : 0.064 secs 
+FileSize : 0.10835 MB 
+Memory Heap Used : 11252928
+Columns Scanned : 1
+Rows Scanned : 1000
+Time: Mon Nov 14 2016 12:34:32 GMT+0530 (IST)
+
+Time Taken : 0.065 secs 
+FileSize : 0.10835 MB 
+Memory Heap Used : 11244048
+Columns Scanned : 1
+Rows Scanned : 1000
+Time: Mon Nov 14 2016 12:34:57 GMT+0530 (IST)
+
+Time Taken : 0.068 secs 
+FileSize : 0.10835 MB 
+Memory Heap Used : 11354656
+Columns Scanned : 1
+Rows Scanned : 1000
+Time: Mon Nov 14 2016 12:35:11 GMT+0530 (IST)
+
+Time Taken : 3.518 secs 
+FileSize : 0.10835 MB 
+Memory Heap Used : 471533736
+Columns Scanned : 18
+Rows Scanned : 1000
+Time: Mon Nov 14 2016 12:36:56 GMT+0530 (IST)
+
+Time Taken : 0.065 secs 
+FileSize : 0.10835 MB 
+Memory Heap Used : 11360912
+Columns Scanned : 1
+Rows Scanned : 1000
+Time: Mon Nov 14 2016 12:37:00 GMT+0530 (IST)
+
+Time Taken : 0.072 secs 
+FileSize : 0.10835 MB 
+Memory Heap Used : 11461840
+Columns Scanned : 1
+Rows Scanned : 1000
+Time: Mon Nov 14 2016 12:37:31 GMT+0530 (IST)
+
+Time Taken : 0.08 secs 
+FileSize : 0.10835 MB 
+Memory Heap Used : 9140416
+Columns Scanned : 1
+Rows Scanned : 1000
+Time: Mon Nov 14 2016 12:38:16 GMT+0530 (IST)
+
+Time Taken : 0.154 secs 
+FileSize : 0.10835 MB 
+Memory Heap Used : 10402480
+Columns Scanned : 1
+Rows Scanned : 1000
+Time: Mon Nov 14 2016 12:43:48 GMT+0530 (IST)
+
+Time Taken : 0.101 secs 
+FileSize : 0.10835 MB 
+Memory Heap Used : 8635376
+Columns Scanned : 1
+Rows Scanned : 1000
+Time: Mon Nov 14 2016 12:44:03 GMT+0530 (IST)
+
+Time Taken : 0.056 secs 
+FileSize : 0.10835 MB 
+Memory Heap Used : 10272072
+Columns Scanned : 1
+Rows Scanned : 4
+Time: Mon Nov 14 2016 12:45:15 GMT+0530 (IST)
+
+Time Taken : 0.056 secs 
+FileSize : 0.10835 MB 
+Memory Heap Used : 10225328
+Columns Scanned : 1
+Rows Scanned : 4
+Time: Mon Nov 14 2016 12:46:14 GMT+0530 (IST)
+
+Time Taken : 0.069 secs 
+FileSize : 0.108351 MB 
+Memory Heap Used : 10593568
+Columns Scanned : 1
+Rows Scanned : 5
+Time: Mon Nov 14 2016 12:46:35 GMT+0530 (IST)
+
+Time Taken : 0.056 secs 
+FileSize : 0.10835 MB 
+Memory Heap Used : 10211192
+Columns Scanned : 1
+Rows Scanned : 4
+Time: Mon Nov 14 2016 12:50:37 GMT+0530 (IST)
+
+Time Taken : 3.581 secs 
+FileSize : 0.10835 MB 
+Memory Heap Used : 472356000
+Columns Scanned : 18
+Rows Scanned : 1000
+Time: Mon Nov 14 2016 12:50:56 GMT+0530 (IST)
+
+Time Taken : 0.031 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 8309184
+Columns Scanned : 7
+Rows Scanned : 10
+Time: Mon Nov 14 2016 12:51:14 GMT+0530 (IST)
+
+Time Taken : 0.026 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 8048200
+Columns Scanned : 1
+Rows Scanned : 10
+Time: Mon Nov 14 2016 12:51:46 GMT+0530 (IST)
+
+Time Taken : 3.335 secs 
+FileSize : 0.10835 MB 
+Memory Heap Used : 472335640
+Columns Scanned : 18
+Rows Scanned : 1000
+Time: Mon Nov 14 2016 12:52:09 GMT+0530 (IST)
+
+Time Taken : 0.056 secs 
+FileSize : 0.10835 MB 
+Memory Heap Used : 10179136
+Columns Scanned : 1
+Rows Scanned : 3
+Time: Mon Nov 14 2016 12:52:15 GMT+0530 (IST)
+
+Time Taken : 0.065 secs 
+FileSize : 0.10835 MB 
+Memory Heap Used : 10218160
+Columns Scanned : 1
+Rows Scanned : 3
+Time: Mon Nov 14 2016 12:55:08 GMT+0530 (IST)
+
+Time Taken : 0.075 secs 
+FileSize : 0.10835 MB 
+Memory Heap Used : 10265936
+Columns Scanned : 1
+Rows Scanned : 3
+Time: Mon Nov 14 2016 12:59:16 GMT+0530 (IST)
+
+Time Taken : 0.228 secs 
+FileSize : 0.10835 MB 
+Memory Heap Used : 9361528
+Columns Scanned : 1
+Rows Scanned : 3
+Time: Mon Nov 14 2016 12:59:47 GMT+0530 (IST)
+
+Time Taken : 0.17 secs 
+FileSize : 0.10835 MB 
+Memory Heap Used : 8640840
+Columns Scanned : 1
+Rows Scanned : 3
+Time: Mon Nov 14 2016 13:01:04 GMT+0530 (IST)
+
+Time Taken : 0.058 secs 
+FileSize : 0.10835 MB 
+Memory Heap Used : 10557112
+Columns Scanned : 1
+Rows Scanned : 3
+Time: Mon Nov 14 2016 13:02:17 GMT+0530 (IST)
+
+Time Taken : 0.056 secs 
+FileSize : 0.10835 MB 
+Memory Heap Used : 10320504
+Columns Scanned : 1
+Rows Scanned : 1000
+Time: Mon Nov 14 2016 13:02:45 GMT+0530 (IST)
+
+Time Taken : 4.527 secs 
+FileSize : 0.10835 MB 
+Memory Heap Used : 500332512
+Columns Scanned : 18
+Rows Scanned : 0
+Time: Mon Nov 14 2016 13:02:53 GMT+0530 (IST)
+
+Time Taken : 3.367 secs 
+FileSize : 0.10835 MB 
+Memory Heap Used : 472280552
+Columns Scanned : 18
+Rows Scanned : 0
+Time: Mon Nov 14 2016 13:03:31 GMT+0530 (IST)
+
+Time Taken : 3.31 secs 
+FileSize : 0.10835 MB 
+Memory Heap Used : 471314296
+Columns Scanned : 18
+Rows Scanned : 0
+Time: Mon Nov 14 2016 13:04:34 GMT+0530 (IST)
+
+Time Taken : 3.292 secs 
+FileSize : 0.10835 MB 
+Memory Heap Used : 471304192
+Columns Scanned : 18
+Rows Scanned : 0
+Time: Mon Nov 14 2016 14:12:23 GMT+0530 (IST)
+
+Time Taken : 0.054 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7844064
+Columns Scanned : 7
+Rows Scanned : 0
+Time: Mon Nov 14 2016 14:13:08 GMT+0530 (IST)
+
+Time Taken : 0.044 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7654248
+Columns Scanned : 1
+Rows Scanned : 10
+Time: Mon Nov 14 2016 14:13:34 GMT+0530 (IST)
+
+Time Taken : 0.063 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7888048
+Columns Scanned : 7
+Rows Scanned : 7
+Time: Mon Nov 14 2016 14:16:16 GMT+0530 (IST)
+
+Time Taken : 0.061 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7841776
+Columns Scanned : 7
+Rows Scanned : 0
+Time: Mon Nov 14 2016 14:17:24 GMT+0530 (IST)
+
+Time Taken : 0.079 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7916912
+Columns Scanned : 7
+Rows Scanned : 0
+Time: Mon Nov 14 2016 14:18:59 GMT+0530 (IST)
+
+Time Taken : 0.062 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7843488
+Columns Scanned : 7
+Rows Scanned : 0
+Time: Mon Nov 14 2016 14:21:18 GMT+0530 (IST)
+
+Time Taken : 8.807 secs 
+FileSize : 0.10835 MB 
+Memory Heap Used : 471319928
+Columns Scanned : 18
+Rows Scanned : 0
+Time: Mon Nov 14 2016 14:24:11 GMT+0530 (IST)
+
+Time Taken : 0.14 secs 
+FileSize : 0.10835 MB 
+Memory Heap Used : 10470880
+Columns Scanned : 1
+Rows Scanned : 1000
+Time: Mon Nov 14 2016 14:24:19 GMT+0530 (IST)
+
+Time Taken : 9.986 secs 
+FileSize : 0.10835 MB 
+Memory Heap Used : 471312128
+Columns Scanned : 18
+Rows Scanned : 1000
+Time: Mon Nov 14 2016 14:25:41 GMT+0530 (IST)
+
+Time Taken : 0.138 secs 
+FileSize : 0.10835 MB 
+Memory Heap Used : 10399696
+Columns Scanned : 1
+Rows Scanned : 1000
+Time: Mon Nov 14 2016 14:26:09 GMT+0530 (IST)
+
+Time Taken : 8.44 secs 
+FileSize : 0.10835 MB 
+Memory Heap Used : 471306816
+Columns Scanned : 18
+Rows Scanned : 1000
+Time: Mon Nov 14 2016 14:27:52 GMT+0530 (IST)
+
+Time Taken : 31.752 secs 
+FileSize : 0.220375 MB 
+Memory Heap Used : 198257760
+Columns Scanned : 18
+Rows Scanned : 2000
+Time: Mon Nov 14 2016 14:29:35 GMT+0530 (IST)
+
+Time Taken : 32.388 secs 
+FileSize : 0.220375 MB 
+Memory Heap Used : 198367968
+Columns Scanned : 18
+Rows Scanned : 2000
+Time: Mon Nov 14 2016 14:43:35 GMT+0530 (IST)
+
+Time Taken : 0.063 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7887928
+Columns Scanned : 7
+Rows Scanned : 10
+Time: Mon Nov 14 2016 14:47:16 GMT+0530 (IST)
+
+Time Taken : 0.045 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7660152
+Columns Scanned : 1
+Rows Scanned : 10
+Time: Mon Nov 14 2016 14:47:20 GMT+0530 (IST)
+
+Time Taken : 0.05 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7658728
+Columns Scanned : 1
+Rows Scanned : 10
+Time: Mon Nov 14 2016 14:48:40 GMT+0530 (IST)
+
+Time Taken : 0.062 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7886704
+Columns Scanned : 7
+Rows Scanned : 10
+Time: Mon Nov 14 2016 14:48:42 GMT+0530 (IST)
+
+Time Taken : 0.052 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7836896
+Columns Scanned : 7
+Rows Scanned : 10
+Time: Mon Nov 14 2016 14:50:10 GMT+0530 (IST)
+
+Time Taken : 0.045 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7655912
+Columns Scanned : 1
+Rows Scanned : 10
+Time: Mon Nov 14 2016 14:50:16 GMT+0530 (IST)
+
+Time Taken : 0.022 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7860312
+Columns Scanned : 7
+Rows Scanned : 10
+Time: Mon Nov 14 2016 15:08:52 GMT+0530 (IST)
+
+Time Taken : 0.087 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7654872
+Columns Scanned : 1
+Rows Scanned : 10
+Time: Mon Nov 14 2016 15:09:05 GMT+0530 (IST)
+
+Time Taken : 12.258 secs 
+FileSize : 0.220375 MB 
+Memory Heap Used : 198449312
+Columns Scanned : 18
+Rows Scanned : 2000
+Time: Mon Nov 14 2016 15:09:43 GMT+0530 (IST)
+
+Time Taken : 12.57 secs 
+FileSize : 0.220375 MB 
+Memory Heap Used : 198275344
+Columns Scanned : 18
+Rows Scanned : 2000
+Time: Mon Nov 14 2016 15:10:16 GMT+0530 (IST)
+
+Time Taken : 12.385 secs 
+FileSize : 0.220375 MB 
+Memory Heap Used : 198466112
+Columns Scanned : 18
+Rows Scanned : 2000
+Time: Mon Nov 14 2016 15:14:36 GMT+0530 (IST)
+
+Time Taken : 12.023 secs 
+FileSize : 0.220375 MB 
+Memory Heap Used : 198480712
+Columns Scanned : 18
+Rows Scanned : 2000
+Time: Mon Nov 14 2016 15:21:37 GMT+0530 (IST)
+
+Time Taken : 12.646 secs 
+FileSize : 0.220375 MB 
+Memory Heap Used : 198477992
+Columns Scanned : 18
+Rows Scanned : 2000
+Time: Mon Nov 14 2016 15:40:53 GMT+0530 (IST)
+
+Time Taken : 0.035 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7903688
+Columns Scanned : 7
+Rows Scanned : 10
+Time: Mon Nov 14 2016 15:54:25 GMT+0530 (IST)
+
+Time Taken : 0.032 secs 
+FileSize : 0.000622 MB 
+Memory Heap Used : 7882648
+Columns Scanned : 7
+Rows Scanned : 10
+Time: Mon Nov 14 2016 16:09:01 GMT+0530 (IST)
+
+Time Taken : 11.337 secs 
+FileSize : 0.220375 MB 
+Memory Heap Used : 200396648
+Columns Scanned : 18
+Rows Scanned : 2000
+Time: Mon Nov 14 2016 16:09:18 GMT+0530 (IST)
+
+Time Taken : 11.563 secs 
+FileSize : 0.22433 MB 
+Memory Heap Used : 209691992
+Columns Scanned : 18
+Rows Scanned : 2000
+Time: Mon Nov 14 2016 16:11:07 GMT+0530 (IST)
+
+Time Taken : 0.888 secs 
+FileSize : 0.22433 MB 
+Memory Heap Used : 10445144
+Columns Scanned : 18
+Rows Scanned : 2000
+Time: Mon Nov 14 2016 16:16:15 GMT+0530 (IST)
+
+Time Taken : 0.859 secs 
+FileSize : 0.220375 MB 
+Memory Heap Used : 9677472
+Columns Scanned : 18
+Rows Scanned : 2000
+Time: Mon Nov 14 2016 16:16:38 GMT+0530 (IST)
+
+Time Taken : 11.353 secs 
+FileSize : 0.220375 MB 
+Memory Heap Used : 200577104
+Columns Scanned : 18
+Rows Scanned : 2000
+Time: Mon Nov 14 2016 16:17:10 GMT+0530 (IST)
+
+Time Taken : 0.864 secs 
+FileSize : 0.220375 MB 
+Memory Heap Used : 9673120
+Columns Scanned : 18
+Rows Scanned : 2000
+Time: Mon Nov 14 2016 16:17:26 GMT+0530 (IST)
+
+Time Taken : 0.696 secs 
+FileSize : 0.220375 MB 
+Memory Heap Used : 9563912
+Columns Scanned : 18
+Rows Scanned : 2000
+Time: Mon Nov 14 2016 16:21:55 GMT+0530 (IST)
+
+Time Taken : 0.698 secs 
+FileSize : 0.220375 MB 
+Memory Heap Used : 9563968
+Columns Scanned : 18
+Rows Scanned : 2000
+Time: Mon Nov 14 2016 16:22:09 GMT+0530 (IST)
+
+Time Taken : 0.939 secs 
+FileSize : 0.220375 MB 
+Memory Heap Used : 9435592
+Columns Scanned : 18
+Rows Scanned : 2000
+Time: Mon Nov 14 2016 16:22:15 GMT+0530 (IST)
+
+Time Taken : 0.701 secs 
+FileSize : 0.220375 MB 
+Memory Heap Used : 9563912
+Columns Scanned : 18
+Rows Scanned : 2000
+Time: Mon Nov 14 2016 16:22:29 GMT+0530 (IST)
+
+Time Taken : 0.746 secs 
+FileSize : 0.220375 MB 
+Memory Heap Used : 9563968
+Columns Scanned : 18
+Rows Scanned : 2000
+Time: Mon Nov 14 2016 16:22:34 GMT+0530 (IST)
+
+Time Taken : 0.686 secs 
+FileSize : 0.220375 MB 
+Memory Heap Used : 9563920
+Columns Scanned : 18
+Rows Scanned : 2000
+Time: Mon Nov 14 2016 16:22:41 GMT+0530 (IST)
+
+Time Taken : 0.718 secs 
+FileSize : 0.220375 MB 
+Memory Heap Used : 10294112
+Columns Scanned : 18
+Rows Scanned : 2000
+Time: Mon Nov 14 2016 16:22:56 GMT+0530 (IST)
+
+Time Taken : 0.715 secs 
+FileSize : 0.220375 MB 
+Memory Heap Used : 10296432
+Columns Scanned : 18
+Rows Scanned : 2000
+Time: Mon Nov 14 2016 16:23:03 GMT+0530 (IST)
+
+Time Taken : 0.704 secs 
+FileSize : 0.220375 MB 
+Memory Heap Used : 10296592
+Columns Scanned : 18
+Rows Scanned : 2000
+Time: Mon Nov 14 2016 16:23:07 GMT+0530 (IST)
+
+Time Taken : 0.701 secs 
+FileSize : 0.220375 MB 
+Memory Heap Used : 10296448
+Columns Scanned : 18
+Rows Scanned : 2000
+Time: Mon Nov 14 2016 16:23:10 GMT+0530 (IST)
+
+Time Taken : 0.708 secs 
+FileSize : 0.220375 MB 
+Memory Heap Used : 10296192
+Columns Scanned : 18
+Rows Scanned : 2000
+Time: Mon Nov 14 2016 16:23:14 GMT+0530 (IST)
+
+Time Taken : 0.708 secs 
+FileSize : 0.220375 MB 
+Memory Heap Used : 10296432
+Columns Scanned : 18
+Rows Scanned : 2000
+Time: Mon Nov 14 2016 16:23:19 GMT+0530 (IST)
+
+Time Taken : 1.805 secs 
+FileSize : 0.220375 MB 
+Memory Heap Used : 10296448
+Columns Scanned : 18
+Rows Scanned : 2000
+Time: Mon Nov 14 2016 16:29:09 GMT+0530 (IST)
+
+Time Taken : 1.858 secs 
+FileSize : 0.220375 MB 
+Memory Heap Used : 10294096
+Columns Scanned : 18
+Rows Scanned : 2000
+Time: Mon Nov 14 2016 16:29:19 GMT+0530 (IST)
+
+Time Taken : 1.837 secs 
+FileSize : 0.220375 MB 
+Memory Heap Used : 10295848
+Columns Scanned : 18
+Rows Scanned : 2000
+Time: Mon Nov 14 2016 16:29:27 GMT+0530 (IST)
+
+Time Taken : 1.841 secs 
+FileSize : 0.220375 MB 
+Memory Heap Used : 10296192
+Columns Scanned : 18
+Rows Scanned : 2000
+Time: Mon Nov 14 2016 16:29:54 GMT+0530 (IST)
+
+Time Taken : 1.897 secs 
+FileSize : 0.220375 MB 
+Memory Heap Used : 10289320
+Columns Scanned : 18
+Rows Scanned : 2000
+Time: Mon Nov 14 2016 16:29:57 GMT+0530 (IST)
+
