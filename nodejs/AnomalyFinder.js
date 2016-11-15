@@ -1,6 +1,5 @@
 // TODO unistall pubnub-rickshaw-memory if not needed
 // TODO look into pure_string and whether its needed
-
 var fs = require('fs'),
 	parse = require('csv-parse'),
 	config = require("./config.js"),
@@ -20,9 +19,9 @@ var fs = require('fs'),
 	start = Date.now(),
 	end,
 	timeTaken,
+	testCaseParseFileVariable = '',
 	fileName  = process.argv[2],
 	columnName  = process.argv[3];
-
 if(fileName && columnName) {
 	read_file(fileName,columnName);
 }
@@ -53,33 +52,47 @@ function getDetailsObject(){
 function fileSizeInMegabytes(filename) {
 	var stats = fs.statSync(filename),
 		fileSizeInBytes = stats["size"],
- 		fileSizeInMegabytes = fileSizeInBytes / 1000000.0 ; //Convert the file size to megabytes 
+		fileSizeInMegabytes = fileSizeInBytes / 1000000.0 ; //Convert the file size to megabytes 
 	return fileSizeInMegabytes
 }
 function read_file (fileName,columnName){
+	var fileExist = fs.existsSync(fileName);
+	if(fileExist == false) {
+		console.log("not a file");
+		return "file_doesnt_Exist"
+	}
+	else {
+		parse_file(fileName,false,columnName)
+		return "file_exists"
+	}	
+}
+function parse_file(fileName,testingCondition,columnName){
 	fileSize = fileSizeInMegabytes(fileName);
 	fs.createReadStream(fileName)
-		.on('error',function(err){
-			if (err["code"] == "ENOENT") { // various errors could be thrown; only if error code is "ENOENT", do we conclude that, it's a missing file or directory scenario..
-				console.log("File "+ fileName + " doesnt exist \nEnsure if the file is in the same directory \nLook for typo errors")	
-				process.exit(0);
-			}
-			else {
-				console.log(err)
-			}			
-		})
-		.pipe(parse({
-				delimiter : ','
-			}))		
-		.on('data',function(rows){	// reads csv, row wise
-			total_rows +=1;
-			create_column(rows,columnName);
-		})
-		.on('end',function(){
-			start_process(columnName,fileName)
-		})
+	.on('error',function(err){
+		console.log(err)					
+	})
+	.pipe(parse({
+		delimiter : ','
+	}))		
+	.on('data',function(rows){	// reads csv, row wise
+		total_rows +=1;
+		create_column(rows,columnName);
+		testCaseParseFileVariable = "file_parsed_will_be_tested";
+	})
+	.on('end',function(){
+		if(testingCondition == false) { // while testing this function start_process triggers the whole chain and fiddles
+			start_process(columnName,fileName) // our testing; thus the variable testingCondition is added
+		} // while testing we set the variable testingCondition to true so that we skip this long chain and test efficiently.
+		store_variable_for_testing_parse_file_function();
+	})
+}
+function store_variable_for_testing_parse_file_function(){
+	//fs module doesnt provide comfort when it comes to returning variables for testing purposes ; Hence this function this created via which testing can be done; this function will not in anyway benefit or affect the process
+	return testCaseParseFileVariable
 }
 function create_column(rows,columnName) {
+	console.log("inside create_column+++...",columnName)
 	// given header name this function creates an array that contains all entries under that header
 	// ex: if columnName is "id" all entries in csv file under id (1,2,3,4,....100) will be pushed inside an array
 	// said array will scanned and tested subsequently..
@@ -97,7 +110,9 @@ function create_column(rows,columnName) {
 			}
 		}
 	}
+	
 	if(rows.indexOf(columnName)>=0) {			
+		console.log("in here bla bla")
 		indexNumber = rows.indexOf(columnName);								
 	}
 	if (columnName == "ALL") {
@@ -107,15 +122,16 @@ function create_column(rows,columnName) {
 		}
 	}
 	if(columnName != "ALL") {
+		console.log("indexNumber in !ALL is ",indexNumber)
 		if(indexNumber == undefined){ // indexNumber remains undefined only if the columnName chosen doesnt exist in 
 			return "column_doesnt_exist" // the first line of the csv file.
 			process.exit(0)
 		}		
-		else {			
+		else {
 			if(targetColumnArray.indexOf(rows[indexNumber]) == -1) {
 				targetColumnArray.push(rows[indexNumber]);	
 			}			
-			return "column exists"
+			return "column_exists"
 		}		
 	}
 }
@@ -187,6 +203,7 @@ function analyse(details,len,columnName) {
 			manage_exceptions(not_anamoly,columnName);			
 		}
 	})
+	return [possible_anamoly,not_anamoly]
 }
 function manage_exceptions(not_anamoly,columnName) {
 	possible_anamoly.map(function(anamolous_datatype){
@@ -213,41 +230,48 @@ function manage_exceptions(not_anamoly,columnName) {
 			}
 		});
 	});
-	show_results(columnName)	
+	show_results(columnName)
+	return [possible_anamoly,not_anamoly]
 }
 function show_results(columnName){
 	if(possible_anamoly.length >0) {
 		var possible_anamoly_length = possible_anamoly.length;
-		possible_anamoly.map(function(datatype,anamolyIterationCount,possibleAnamolyArray){
+		return possible_anamoly.map(function(datatype,anamolyIterationCount,possibleAnamolyArray){
 			Object.keys(details[datatype]).map(function(key){
-				console.log("\x1b[31m","Entry " + key + " at row number " + details[datatype][key]["rowCount"] + " in column "+ columnName +" is out of place; because it contains datatype " + datatype + "" ,"\x1b[0m");
+				console.log("\x1b[31m","Entry " + key + " at row number " + details[datatype][key]["rowCount"] + " in column "+ columnName +" is out of place; because it contains datatype " + datatype + "" ,"\x1b[0m");				
 			});	
 			if(anamolyIterationCount == possible_anamoly_length-1){
-				store_performance_details_trigger(timeTaken,allColumnScan,columnName);
+				store_performance_details_trigger(allColumnScan,columnName);
+				return "error_in_column"
 			}
 		});
 		
 	}
 	else {
 		console.log("\x1b[32m","Column " + columnName + " appears to be clean","\x1b[0m");
-		store_performance_details_trigger(timeTaken,allColumnScan,columnName);
+		store_performance_details_trigger(allColumnScan,columnName);
 		return "clean_column"
 	}
 }
-function store_performance_details_trigger(timeTaken,allColumnScan,columnName){
+function store_performance_details_trigger(allColumnScan,columnName){ // first variable is global variable, still its being passed to aid in TESTING... i.e the first variable could be removed and the code will still work ..
 	end = Date.now();
 	timeTaken = (end-start)/1000;
+	console.log("header is" +header+" and allColumnScan is "+allColumnScan+"")
 	if(allColumnScan == true && header.indexOf(columnName) == header.length-1) { // When all Columns are Scanned the 		
-		store_performance_details(timeTaken,header.length,targetColumnArray) //performance function should be invoked only 
-	} // after the last column is scanned; thus the if loop;
+		store_performance_details(header.length) //performance function should be invoked only 
+		return "all_columns_are_scanned" // after the last column is scanned; thus the if loop;
+	}
 	else if(allColumnScan == false){ // when single column is scanned no of columns scanned should be registered as "1"
-		store_performance_details(timeTaken,1,targetColumnArray)
+		store_performance_details(1)
+		console.log("header inside store_performance_details_trigger is ",header)
+		return ["single_column_is_scanned",header.length]
 	}
 }
-function store_performance_details(timeTaken,columnsScanned) {
+function store_performance_details(columnsScanned) {
 	var heapUsed = process.memoryUsage()["heapUsed"],
 		performanceDetails = "Time Taken : "+timeTaken+" secs \nFileSize : "+ fileSize+" MB \nMemory Heap Used : "+ heapUsed + "\nColumns Scanned : "+columnsScanned+ "\nRows Scanned : "+total_rows+ "\nTime: "+Date(Date.now())+"\n\n";
 	fs.appendFileSync('performance.txt', performanceDetails, 'utf8')
+	return "data_stored"
 }
 function special_characters(details,param,columnName,arrayFullScan) {
 	var re = new RegExp(/\`|\~|\!|\@|\#|\$|\_|\%|\^|\&|\*|\(|\)|\+|\=|\[|\{|\]|\}|\||\\|\'|\<|\,|\>|\?|\/|\""|\;|\:/g)	
@@ -367,7 +391,6 @@ function common_array_entries(array, arr) {
         return array.indexOf(v) >= 0;
     });
 }
-
 module.exports = {
 	getDetailsObject : getDetailsObject,
 	string : string,
@@ -385,5 +408,12 @@ module.exports = {
 	start_process : start_process,
 	targetColumnArray : targetColumnArray,
 	construct_detail_object : construct_detail_object,
+	analyse : analyse,
+	manage_exceptions : manage_exceptions,
+	store_performance_details_trigger : store_performance_details_trigger,
+	store_performance_details : store_performance_details,
+	fileSizeInMegabytes : fileSizeInMegabytes,
+	store_variable_for_testing_parse_file_function : store_variable_for_testing_parse_file_function,
+	parse_file : parse_file,
 	show_results : show_results
 }
