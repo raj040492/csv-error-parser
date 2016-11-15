@@ -1,16 +1,18 @@
 var expect = require('chai').expect,
 	assert = require('assert'),
+	fs = require('fs'),
 	AnomalyFinder = require('../AnomalyFinder.js'),
+	details = AnomalyFinder.getDetailsObject(),
 	config = require('../config.js'),
 	special_characters = config.special_characters,
 	states = config.states,
 	state_codes = config.state_codes,
 	random_state = states[Math.floor(Math.random() * states.length)],
 	random_state_code = state_codes[Math.floor(Math.random() * state_codes.length)],
-	random_special_character = special_characters[Math.floor(Math.random() * special_characters.length)],
-	details = AnomalyFinder.getDetailsObject();	
+	random_special_character = special_characters[Math.floor(Math.random() * special_characters.length)];
 
-describe.skip('Testing String',function(){
+
+describe('Testing String',function(){
 	describe("Testing 1234Random in string scenario ", function() {		
 		it("should return index ",function(){
 			assert.equal(AnomalyFinder.string(details,"1234Random"),true) // position of the first string
@@ -48,7 +50,7 @@ describe.skip('Testing String',function(){
 	});
 })
 
-describe.skip('Testing Integer',function(){
+describe('Testing Integer',function(){
 	describe("Testing random123 in integer scenario ", function() {		
 		it("should pass ",function(){
 			assert.equal(AnomalyFinder.integer(details,"random123"),true)
@@ -74,7 +76,7 @@ describe.skip('Testing Integer',function(){
 	});
 });
 
-describe.skip('Testing Email',function(){
+describe('Testing Email',function(){
 	describe("Testing host@gmail.com in email scenario ", function() {		
 		it("should pass ",function(){
 			assert.equal(AnomalyFinder.email(details,"host@gmail.com"),true)
@@ -100,7 +102,7 @@ describe.skip('Testing Email',function(){
 	});
 });
 
-describe.skip('Testing states',function(){
+describe('Testing states',function(){
 	describe('Testing '+random_state+' in state scenario',function(){		
 		it("should pass ",function(){
 			assert.equal(AnomalyFinder.states(details,random_state),true)
@@ -114,7 +116,7 @@ describe.skip('Testing states',function(){
 	});
 });
 
-describe.skip('Testing state codes',function(){
+describe('Testing state codes',function(){
 	describe('Testing '+random_state_code+' in state scenario',function(){
 		it("should pass ",function(){
 			assert.equal(AnomalyFinder.state_code(details,random_state_code),true)
@@ -128,7 +130,7 @@ describe.skip('Testing state codes',function(){
 	});
 });
 
-describe.skip('Testing special_characters codes',function(){
+describe('Testing special_characters codes',function(){
 	describe('Testing '+ random_special_character + ' in special_characters scenario',function(){
 		it("should pass",function(){
 			assert.equal(AnomalyFinder.special_characters(details,random_special_character),true)
@@ -143,29 +145,19 @@ describe.skip('Testing special_characters codes',function(){
 });
 
 // skipping functions getDetailsObject, read_file, //TODO..
-describe.skip("Testing Functions",function(){
+describe("Testing Functions",function(){
 	describe("Testing Function classify",function(){
 		it("should return classified",function(){
 			// assert.equal(AnomalyFinder.classify(1234,"id"),"classified")
 		})
 	});
 
-	
-
-
-	// describe("Testing Function read_file", function(){
-	// 	it("should return error",function(){
-	// 		console.log("AnomalyFinder.read_file('mock.csv','asdas') is ",AnomalyFinder.read_file("asda",'asas'))
-	// 		assert.equal(AnomalyFinder.read_file("asda","adas"),"asdasdasdasdasads")
-	// 	})
-	// });
-
 	describe("Testing Function getDetailsObject", function(){
 		it("should return getDetailsObject",function(){
 			assert.equal(JSON.stringify(AnomalyFinder.getDetailsObject()),'{"uppercase_entries":{},"string":{},"integer":{},"pure_integer":{},"pure_string":{},"email":{},"state_codes":{},"states":{},"special_characters":{},"zip_code":{}}')
 		})
 	});
-	//start_process and analyse can't be tested for now.. DUE to multiple map issue..
+	//start_process can't be tested for now.. DUE to multiple map issue..//TODO
 
 	// describe("Testing Function start_process",function(){
 	// 	it("should return bla bla",function(){
@@ -179,15 +171,10 @@ describe.skip("Testing Functions",function(){
 	// 	})		
 	// })
 	
-	describe("Testing construct_detail_object",function(){
-		before(function(done){
-			console.log("AnomalyFinder.targetColumnArray is ",AnomalyFinder.targetColumnArray)
-			// AnomalyFinder.targetColumnArray = [];
-			console.log("inside before...")
-			console.log("AnomalyFinder.targetColumnArray after reset is ",AnomalyFinder.targetColumnArray)
-			done();
-		});
-		
+	describe.skip("Testing construct_detail_object",function(){ // COME BACK HERE TODO..
+
+		// console.log("AnomalyFinder.targetColumnArray is ",AnomalyFinder.targetColumnArray)
+
 		it("should return modified detail object",function(){
 			console.log("inside it...")
 			AnomalyFinder.create_column(config.header_row,"first_name")
@@ -203,31 +190,110 @@ describe.skip("Testing Functions",function(){
 
 });
 
+describe("Testing create_column functions",function(){
 
-describe.skip("Testing create_column functions",function(){
+	it("should return column_doesnt_exist",function(){
+		assert.equal(AnomalyFinder.create_column(config.test_row,"id"),"column_doesnt_exist")
+	})
 
-	describe("Testing Function create_column failure",function(){
-		it("should return column_doesnt_exist",function(){
-			assert.equal(AnomalyFinder.create_column(config.test_row,"id"),"column_doesnt_exist")
-		})
-	});
+	it("should return column_exists",function(){
+		assert.equal(AnomalyFinder.create_column(config.header_row,"id"),"column_exists")
+	})
 
-	describe("Testing Function create_column",function(){
-		AnomalyFinder.create_column(config.header_row,"id")
-		it("should return something",function(){
-			assert.equal(AnomalyFinder.create_column(config.header_row,"id"),"column exists")
-		})
-	});
-
-	// afterEach(function(){
-	// 	AnomalyFinder.targetColumnArray = [];
-	// 	console.log("inside after...")
-	// 	console.log("targetColumnssssArray____ is ",AnomalyFinder.targetColumnArray)
-	// })
 });
 
-describe("Testing show results function",function(){
-	it("should return asdasdasa",function(){
-		assert.equal(AnomalyFinder.show_results(['pure_integer'],['integer']),[])
+
+describe("Testing Functions analyse, manage_exceptions, show_results in a error filled column ",function(){
+	var return_from_analyse = AnomalyFinder.analyse(config.test_details_with_error,9,"id"),
+		return_from_manage_exceptions = AnomalyFinder.manage_exceptions(return_from_analyse[1],"id"),
+		return_from_show_results = AnomalyFinder.show_results("id"),
+		return_from_store_performance_details_trigger = AnomalyFinder.store_performance_details_trigger(false,"id"),
+		return_from_store_performance_details = AnomalyFinder.store_performance_details(return_from_store_performance_details_trigger[1]);		
+	
+	it("should return correct possible_anamoly and not_anamoly ",function(){
+		assert.equal(return_from_analyse[0].toString(),[ 'string' ].toString())
+		assert.equal(return_from_analyse[1].toString(),[ 'integer', 'pure_integer' ].toString())
+	})
+	
+	it("should return correct possible_anamoly and not_anamoly ",function(){
+		assert.equal(return_from_manage_exceptions[0].toString(),[ 'string' ].toString())
+		assert.equal(return_from_manage_exceptions[1].toString(),[ 'integer', 'pure_integer' ].toString())
+	})
+
+	it("should return error_in_column",function(){
+		assert.equal(return_from_show_results.toString(),['error_in_column'])
+	})
+
+	it("should return single_column_is_scanned",function(){
+		assert.equal(return_from_store_performance_details_trigger[0],"single_column_is_scanned")
+		assert.equal(return_from_store_performance_details_trigger[1],7)
+	})
+
+	it("should return data_stored",function(){
+		assert.equal(return_from_store_performance_details,"data_stored")
+	})
+})
+
+describe("Testing Functions analyse, manage_exceptions, show_results in a clean column ",function(){
+	var return_from_analyse = AnomalyFinder.analyse(config.test_details_without_error,9,"email"),
+		return_from_manage_exceptions = AnomalyFinder.manage_exceptions(return_from_analyse[1],"email"),
+		return_from_show_results = AnomalyFinder.show_results("email"),
+		return_from_store_performance_details_trigger = AnomalyFinder.store_performance_details_trigger(false,"email"),
+		return_from_store_performance_details = AnomalyFinder.store_performance_details(return_from_store_performance_details_trigger[1]);
+	
+	it("should return correct possible_anamoly and not_anamoly ",function(){
+		assert.equal(return_from_analyse[0].toString(),[])
+		assert.equal(return_from_analyse[1].toString(),["string","integer","email","special_characters"].toString())
+	})
+	
+	it("should return correct possible_anamoly and not_anamoly ",function(){
+		assert.equal(return_from_manage_exceptions[0].toString(),[])
+		assert.equal(return_from_manage_exceptions[1].toString(),["string","integer","email","special_characters"].toString())
+	})
+
+	it("should return clean_column",function(){
+		assert.equal(return_from_show_results.toString(),['clean_column'])
+	})
+
+	it("should return single_column_is_scanned",function(){
+		assert.equal(return_from_store_performance_details_trigger[0],"single_column_is_scanned")
+		assert.equal(return_from_store_performance_details_trigger[1],7)
+	})
+
+	it("should return data_stored",function(){
+		assert.equal(return_from_store_performance_details,"data_stored")
+	})
+})
+
+describe("Testing read_file",function(){ //NOT WORKING COME BACK HERE TODO..
+	var return_from_read_file_fail = AnomalyFinder.read_file("test1Cases.csv"),
+		return_from_read_file_pass = AnomalyFinder.read_file("testCases.csv");
+	it("should return file_doesnt_Exist",function(){
+		assert.equal(return_from_read_file_fail,"file_doesnt_Exist")
+	})
+
+	it("should return file_exists",function(){
+		assert.equal(return_from_read_file_pass,"file_exists")
+	})
+})
+
+describe("Testing parse_file",function(){ //NOT WORKING COME BACK HERE TODO..
+	var return_from_store_variable_for_testing_parse_file_function;
+	it("will return nothing, just parse the csv file",function(done){
+		this.timeout(10000);
+		AnomalyFinder.parse_file("testCases.csv",true);
+		done();
+	})
+	it("should return file_parsed_will_be_tested",function(){
+		return_from_store_variable_for_testing_parse_file_function = AnomalyFinder.store_variable_for_testing_parse_file_function();
+		// console.log("return_from_store_variable_for_testing_parse_file_function is ",return_from_store_variable_for_testing_parse_file_function)
+		assert.equal(return_from_store_variable_for_testing_parse_file_function,"file_parsed_will_be_tested")
+	})
+})
+
+describe("Testing function fileSizeInMegabytes",function(){
+	var fileSizeInMegabytes = (fs.statSync("testCases.csv")["size"])/1000000.0 ;
+	it("should return correct file Size",function(){
+		assert.equal(AnomalyFinder.fileSizeInMegabytes("testCases.csv"),fileSizeInMegabytes)
 	})
 })
